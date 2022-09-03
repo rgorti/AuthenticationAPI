@@ -15,11 +15,11 @@ Problem: Implement a simple account/authentication service.  At a minimum, the a
 
 
 #APIs
-1. POST /user/signup  Registers new user
-2. POST /user/signin  Signs in new user
-3. GET /user/{username} Gets user by name
-4. POST /user/token Gets a JWT token for the user to access other resources
-5. GET /welcome     Gets the sample Welcome page by using the token generated
+1. POST /user/signup  	---Registers new user
+2. POST /user/signin  	---Signs in new user
+3. GET /user/{username} ---Gets user by name
+4. POST /user/token 	---Gets a JWT token for the user to access other resources
+5. GET /welcome     	---Gets the sample Welcome page by using the token generated
 
 #How to Test using Postman
 1. Setup the application in STS/IntelliJ/Eclipse by cloning from git
