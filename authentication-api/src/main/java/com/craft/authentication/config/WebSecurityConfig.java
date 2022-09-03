@@ -35,40 +35,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private WebAuthEntryPoint authEntryPoint;
 	
 	@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-	
-		 
-	     auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-   }
+    	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+   	}
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
+    	protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
                 .disable()
                 .cors()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/user/signin", "/user/signup","/user/token").permitAll()//only allow this endpoint without authentication
+                .antMatchers("/user/signup","/user/token").permitAll()//only allow this endpoint without authentication
                 .anyRequest().authenticated()//for any other request, authentication should performed
                 .and()
                 .exceptionHandling().authenticationEntryPoint(authEntryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);//every request should be independent of other and server does not have to manage session
-
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
-    }
+    	}
 	
 	@Bean
-	public PasswordEncoder passwordEncoder(){
-		
+	public PasswordEncoder passwordEncoder(){		
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	    return encoder;
+	    	return encoder;
 	}
 
-		
 	@Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
+    	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        	return authConfig.getAuthenticationManager();
+    	}
 
 }
