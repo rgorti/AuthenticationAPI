@@ -27,10 +27,10 @@ Problem: Implement a simple account/authentication service.  At a minimum, the a
     - Create database userdb
 3. Modify application.properties as per your db 
 4. Start SpringBoot application on port 8080
-
-1. POST /user/signup
 Open postman and provide
-```URL: http://localhost:8080/user/signup
+```
+1. POST /user/signup
+URL: http://localhost:8080/user/signup
 RequestBody: {
     "username": "testuser",
     "password": "testuser",
@@ -39,7 +39,8 @@ RequestBody: {
     "email": "testuser@gmail.com"
 }
 Content-type: application/json
-Response: A testuser gets created with encrypted password in DB```
+Response: A testuser gets created with encrypted password in DB
+```
 
 2. POST /user/token : Generates User token
 URL: http://localhost:8080/user/token
