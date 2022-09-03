@@ -15,12 +15,13 @@ Problem: Implement a simple account/authentication service.  At a minimum, the a
 
 
 #APIs
+```
 1. POST /user/signup  	---Registers new user
 2. POST /user/signin  	---Signs in new user
 3. GET /user/{username} ---Gets user by name
 4. POST /user/token 	---Gets a JWT token for the user to access other resources
 5. GET /welcome     	---Gets the sample Welcome page by using the token generated
-
+```
 #How to Test using Postman
 1. Setup the application in STS/IntelliJ/Eclipse by cloning from git
 2. Setup the MySQL database 
@@ -28,8 +29,8 @@ Problem: Implement a simple account/authentication service.  At a minimum, the a
 3. Modify application.properties as per your db 
 4. Start SpringBoot application on port 8080
 Open postman and provide
-```
 1. POST /user/signup
+```
 URL: http://localhost:8080/user/signup
 RequestBody: {
     "username": "testuser",
@@ -43,6 +44,7 @@ Response: A testuser gets created with encrypted password in DB
 ```
 
 2. POST /user/token : Generates User token
+```
 URL: http://localhost:8080/user/token
 RequestBody: {
 	"username": "testuser",
@@ -50,9 +52,11 @@ RequestBody: {
 }
 Content-type: application/json
 Response: A token gets generated for the user. Use the token to signin and to access other resources. 
+```
 
 3. POST /user/signin : Allows user to SignIn to the system
-URL: http://localhost:8080/user/signin
+``` 
+5. URL: http://localhost:8080/user/signin
 RequestBody: {
 	"username": "testuser",
 	"password": "testuser"
@@ -60,16 +64,19 @@ RequestBody: {
 Content-type: application/json
 Authorization: Bearer {$token}
 Response: User gets Signed in to the system
-
+```
 4. GET /user/testuser
+```
 URL: http://localhost:8080/user/testuser
 Authorization: Bearer {$token}
 Response: Gets the user details
-
+```
 5. GET /welcome
+```
 URL: http://localhsot:8080/welcome
 Authorization: Bearer {$token}
 Response: A Welcome Page
+```
 
 
 
