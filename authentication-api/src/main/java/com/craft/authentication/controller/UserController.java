@@ -45,32 +45,38 @@ public class UserController {
 	@RequestMapping(method=RequestMethod.POST,value="/user/signin")
 	public ResponseEntity<UserResponse> signInUser(@RequestBody UserRequest userRequest) {
 		String userToken = this.generateToken(userRequest);
-        UserResponse userResponse = new UserResponse(userToken);
-        userResponse.setMessage("Congratulations User "+ userRequest.getUsername()+ " Successfully SignedIn. Use the token to access other resources");
-        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
+        	UserResponse userResponse = new UserResponse(userToken);
+        	userResponse.setMessage("Congratulations User "+ userRequest.getUsername()+ " Successfully SignedIn. Use the token to access other resources");
+        	return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user/token")
 	public ResponseEntity<UserResponse> getToken(@RequestBody UserRequest userRequest) {
 		String userToken = this.generateToken(userRequest);
-        UserResponse userResponse = new UserResponse(userToken);
-        userResponse.setMessage("JWT Token is Generated for the user "+userRequest.getUsername());
-        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
+        	UserResponse userResponse = new UserResponse(userToken);
+        	userResponse.setMessage("JWT Token is Generated for the user "+userRequest.getUsername());
+        	return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 	
-	@GetMapping("/user/{username}")
-    public UserModel getCurrentUser(Principal principal) {
-        UserDetails userDetails =  this.userService.loadUserByUsername(principal.getName());
-        return (UserModel) userDetails;
-    }
+	// Returns signedIn user
+	@GetMapping("/user")
+   	public UserModel getCurrentUser(Principal principal) {
+        	UserDetails userDetails =  this.userService.loadUserByUsername(principal.getName());
+        	return (UserModel) userDetails;
+    	} 
+	@RequestMapping(method=RequestMethod.GET,value="/user/{username}")
+	public ResponseEntity<UserModel> getUserByName(@PathVariable String username){
+		UserModel userDetails = (UserModel) this.userService.loadUserByUsername(username);
+		ResponseEntity<UserModel> responeEntity = new ResponseEntity<>(userDetails, HttpStatus.OK);
+		return responeEntity;
 	
 	public String generateToken(@RequestBody UserRequest userRequest) {
 		
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userRequest.getUsername(), userRequest.getPassword());
 		authenticationManager.authenticate(authToken);
 		UserDetails userDetails = userService.loadUserByUsername(userRequest.getUsername());
-        String userToken = securityUtil.generateToken(userDetails);
-        return userToken;
+        	String userToken = securityUtil.generateToken(userDetails);
+        	return userToken;
 	
 	}
 }
