@@ -70,7 +70,7 @@ public class UserController {
 		ResponseEntity<UserModel> responeEntity = new ResponseEntity<>(userDetails, HttpStatus.OK);
 		return responeEntity;
 	
-	public String generateToken(@RequestBody UserRequest userRequest) {
+	private String generateToken(@RequestBody UserRequest userRequest) {
 		
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userRequest.getUsername(), userRequest.getPassword());
 		authenticationManager.authenticate(authToken);
