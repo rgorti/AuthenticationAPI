@@ -23,8 +23,6 @@ public class UserService implements UserDetailsService{
     private Encoder encoder;
 	
 	public UserModel createUser(UserModel userModel) {
-		// TODO Auto-generated method stub
-		System.out.println("With in User Service");
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userModel, userEntity);
 		userEntity.setPassword(encoder.newPasswordEncoder().encode(userModel.getPassword()));
@@ -40,10 +38,8 @@ public class UserService implements UserDetailsService{
 	     if(userEntity == null) {
 	        throw new UsernameNotFoundException("User does not exist!");
 	     }
-
 	     UserModel userModel = new UserModel();
-	     BeanUtils.copyProperties(userEntity, userModel);
-	        
+	     BeanUtils.copyProperties(userEntity, userModel);      
 	     return userModel;
 	}
 
